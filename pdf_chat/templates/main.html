@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat PDF</title>
+</head>
+<body>
+    <h1>Chat with PDF using Gemini💁</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="user_question" placeholder="Ask a Question from the PDF Files">
+        <input type="file" name="pdf_docs" multiple accept="application/pdf">
+        <button type="submit">Submit & Process</button>
+    </form>
+    <div>
+        {% if response %}
+            <p>Reply: {{ response }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

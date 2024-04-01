@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Chat Index</title>
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'pdf.js-master\pdf.js-master\web\viewer.css' %}"> {% endcomment %}
+</head>
+<body>
+    <div style="display: flex; flex-direction: row;">
+        <div style="flex: 1;">
+            <h2>Chat</h2>
+            <!-- Chat section content -->
+        </div>
+        <div style="flex: 1;">
+            <h2>PDF Preview</h2>
+            {% if pdf_content %}
+                <pre>{{ pdf_content }}</pre>
+                {% comment %} <iframe id="pdf-iframe" src="{% static 'Jay_Resume.pdf' %}" width="100%" height="600px" style="border: none;"></iframe> {% endcomment %}
+                {% comment %} <iframe id="pdf-iframe" src="{% static 'pdf.js-master\pdf.js-master\web\viewer.html?file=' %}{{pdf_file_path}}" width="100%" height="600px" style="border: none;"></iframe> {% endcomment %}
+                {% else %}
+                <p>No PDF uploaded</p>
+            {% endif %}
+        </div>
+        <div style="flex: 1;">
+            <h2>Chatbot</h2>
+            <!-- Chatbot section content -->
+        </div>
+    </div>
+    <script src="{% static 'pdf.js-master/build/pdf.js' %}"></script>
+    <script src="{% static 'pdf.js-master/web/viewer.js' %}"></script>
+</body>
+</html>
