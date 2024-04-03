@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <title>Preview File</title>
+</head>
+<body>
+  <h1>Preview</h1>
+  {% if file %}
+  <h1> {{file.file.url}} </h1>
+
+
+  <iframe src="data:application/pdf;base64,{{encoded_pdf}}" width="700" height="1000" style="border: none;"></iframe>
+
+
+        {% comment %} <embed src="{{ file.file.url }}"type="application/pdf" width="100%"	height="100%"/> {% endcomment %}
+        {% comment %} <iframe
+	src="{{ file.file.url }}"
+	width="100%"
+	height="100%"
+	style="border:none"
+></iframe> {% endcomment %}
+   
+
+  
+  {% else %}
+    <p>File not found.</p>
+  {% endif %}
+</body>
+</html>

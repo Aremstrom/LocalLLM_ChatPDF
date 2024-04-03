@@ -1,35 +1,59 @@
 <!DOCTYPE html>
-{% load static %}
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Chat Index</title>
-    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'pdf.js-master\pdf.js-master\web\viewer.css' %}"> {% endcomment %}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: row; /* Changed to column */
+            height: 100vh;
+        }
+        .section {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 10px;
+            overflow: auto;
+        }
+    </style>
 </head>
 <body>
-    <div style="display: flex; flex-direction: row;">
-        <div style="flex: 1;">
+    <div class="container">
+        <div class="section">
             <h2>Chat</h2>
+            <iframe
+            src="https://docs.google.com/gview?url={{MEDIA_URL}}"
+            className="w-full h-full"
+          ></iframe>
+            <p style="font-color:black;">{{ MEDIA_URL }}</p>
             <!-- Chat section content -->
+            {% comment %} <iframe src="{{pdf_path}}" width="100%" height="600px" frameborder="0"></iframe> {% endcomment %}
+            {% comment %} <iframe src="{{ MEDIA_URL }}{{ pdf_path }}" width="100%" height="600px" frameborder="0"></iframe> {% endcomment %}
         </div>
-        <div style="flex: 1;">
+        <div class="section">
             <h2>PDF Preview</h2>
             {% if pdf_content %}
-                <pre>{{ pdf_content }}</pre>
-                {% comment %} <iframe id="pdf-iframe" src="{% static 'Jay_Resume.pdf' %}" width="100%" height="600px" style="border: none;"></iframe> {% endcomment %}
-                {% comment %} <iframe id="pdf-iframe" src="{% static 'pdf.js-master\pdf.js-master\web\viewer.html?file=' %}{{pdf_file_path}}" width="100%" height="600px" style="border: none;"></iframe> {% endcomment %}
+                {% comment %} <pre>{{ pdf_content }}</pre> {% endcomment %}
+                {% comment %} <embed src="data:application/pdf;base64,{{ pdf_content }}" type="application/pdf" width="100%" height="100%"> {% endcomment %}
+                    {% comment %} <embed src="{{ MEDIA_URL }}{{ pdf_path }}" type="application/pdf" width="100%" height="600px"> {% endcomment %}
+                <iframe src="{{pdf_path}}" width="100%" height="600px" frameborder="0"></iframe>
+              
                 {% else %}
                 <p>No PDF uploaded</p>
             {% endif %}
+            
         </div>
-        <div style="flex: 1;">
+        <div class="section">
             <h2>Chatbot</h2>
             <!-- Chatbot section content -->
         </div>
     </div>
-    <script src="{% static 'pdf.js-master/build/pdf.js' %}"></script>
-    <script src="{% static 'pdf.js-master/web/viewer.js' %}"></script>
 </body>
 </html>
